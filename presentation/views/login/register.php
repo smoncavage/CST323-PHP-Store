@@ -148,7 +148,7 @@ if($firstname && $lastname && $username && $pass != NULL){
 $conn.close();
 ?>
 
-Click <a href = "../index.php"> here </a> to return to the Main page, or 
+Click <a href = "../home.php"> here </a> to return to the Main page, or 
 	<a href = "./login.php"> here </a> to go to the Login page.
 
 </body>

@@ -6,7 +6,7 @@ Milestone 2
 -->
 <?php
 
-include('../../../autoloader.php');
+include('../../autoloader.php');
 
 function displayAllProducts($products){    
     if(!$products){
