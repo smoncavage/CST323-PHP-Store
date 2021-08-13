@@ -21,8 +21,8 @@ include './layout_head.php';
 </div>
 
 	<br>
-	<a href="../login/login.php"> <input type = "submit" name = "login" value = "Login"/> </a>
-	<a href="../login/register.html"> <input type = "submit" name = "register" value = "Register" /> </a>
+	<a href="../views/login/login.php"> <input type = "submit" name = "login" value = "Login"/> </a>
+	<a href="../views/login/register.html"> <input type = "submit" name = "register" value = "Register" /> </a>
 
 </body>
 <?php include './layout_foot.php'; ?>

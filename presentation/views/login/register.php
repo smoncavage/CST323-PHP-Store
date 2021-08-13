@@ -7,11 +7,12 @@ Milestone 1
 PHP Form handler for HTML Registration Module
 -->
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors',1);
-include_once'../../../../autoloader.php';
+//error_reporting(E_ALL);
+//ini_set('display_errors',1);
+include_once'../../../autoloader.php';
 include '../layout_head.php';
-include '../../../database/db.php';
+include '../../../Database/db.php';
+include '../navigation.php';
 $db = new Database();
 $conn=$db->getConnection();
 $firstname = $lastname = $username = $pass = $email = $address1 = $city = $state = $zipcode = $country = "";
