@@ -18,13 +18,6 @@ Milestone 1
 	<link rel = "stylesheet" href = "../css/style.css" type="text/css">
 	
 	<title>Search Form</title>
-	<nav>
-		<a href="./index.php">Home</a>
-		<a href="./About.php">About</a>
-		<a href="./Contact.php">Contact</a>
-		<a href="./Store.php">Store</a>
-		<a href="./search.html">Search</a>
-	</nav>
 </head>
 <body class = "body">
 <div class="container" id="main-content">

@@ -2,10 +2,10 @@
 class Database{
  
     // specify your own database credentials
-    private $host = "localhost";
-    private $db_name = "ecommerce";
-    private $username = "root";
-    private $password = "root";
+    private $host = "cst323php.mysql.database.azure.com";
+    private $db_name = "appdata";
+    private $username = "adminuser";
+    private $password = "NaVy.2005";
     public $conn;
  
     // get the database connection
