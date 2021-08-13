@@ -17,21 +17,11 @@ error_reporting(E_ALL);
 ini_set('display_errors',1);
 include '../layout_head.php';
 include('./_displayAllProducts.php');
-include('../../../autoloader.php');
+include('../../autoloader.php');
 //displayAllProducts();
 ?>
 <link rel = "stylesheet" href = "../css/style.css" type="text/css">
-<head>
 
-	<meta charset="UTF-8"> 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#ffffff">
-	
-	<link rel = "stylesheet" href = "../css/style.css" type="text/css">
-	
-	<title>Search Form</title>
-</head>
 <body class = "body" style="text-align:center" class="form2"> 
 <div style="text-align:center" class="container" id="main-content">
 	<h3 class = "home-title" >Welcome to eCommerce!</h3> 

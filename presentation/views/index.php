@@ -10,17 +10,7 @@ $layout = __DIR__.'/Presentation/views/layout_head.php';
 include './layout_head.php'; 
 ?>
 <link rel = "stylesheet" href = "../css/style.css" type="text/css"/>
-<head>
 
-	<meta charset="UTF-8"> 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#ffffff">
-	
-	<link rel = "stylesheet" href = "../css/style.css" type="text/css">
-	
-	<title>Search Form</title>
-</head>
 <body class = "body">
 
 <div class="container" id="main-content">

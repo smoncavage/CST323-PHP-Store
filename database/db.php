@@ -7,6 +7,10 @@ class Database{
     private $username = "adminuser";
     private $password = "NaVy.2005";
     public $conn;
+	
+	public $con = mysqli_init(); 
+	mysqli_ssl_set($con, NULL, NULL, {ca-cert filename}, NULL, NULL); 
+	mysqli_real_connect($con, "cst323php.mysql.database.azure.com", "adminuser@cst323php", $password, $database, 3306);
  
     // get the database connection
     public function getConnection(){
