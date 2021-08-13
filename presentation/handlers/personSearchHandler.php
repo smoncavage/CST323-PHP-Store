@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 
-include('../../autoloader.php');
+include_once('../../autoloader.php');
 //include('../../../BusinessService/UserBusinessService.php');
 
 $searchPhrase = $_GET['searchPerson'];
