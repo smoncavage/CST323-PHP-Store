@@ -6,14 +6,15 @@ Milestone 1
 27 February 2021
 PHP Form handler for HTML Registration Module
 -->
+<?php include_once '../layout_head.php'; ?>
+<link rel = "stylesheet" href = "../../css/style.css" type="text/css"/>
+<body class = "body">
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors',1);
-include_once'../../../../autoloader.php';
-include '../layout_head.php';
-include '../../../database/db.php';
-$db = new Database();
-$conn=$db->getConnection();
+include_once '../../../autoloader.php';
+require_once '../../../database/db.php';
+
+$db= new Database();
+$conn=$db->dbConnect();
 $firstname = $lastname = $username = $pass = $email = $address1 = $city = $state = $zipcode = $country = "";
 $address2 = $_REQUEST["address2"];
 $role = $_REQUEST["role"];
@@ -118,11 +119,11 @@ function test_input($data) {
 $password = password_hash($pass, PASSWORD_DEFAULT);
 
 //Create MSQLI Statement for User Insertion 
-$sql = "INSERT INTO ecommerce.users (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD)
-VALUES ('$firstname','$lastname','$username', '$password')";
+$sql = "INSERT INTO users (FIRST_NAME, LASTNAME, USERNAME, PASS, EMAIL, ADDRESS1, ADDRESS2, CITY, STATE, ZIPCODE, COUNTRY, ROLE) 
+VALUES ('$firstname','$lastname','$username', '$password','$email','$address1','$address2','$city','$state','$zipcode','$country','$role')";
 
 //Validate Statement and execute
-if($firstname && $lastname && $username && $pass != NULL){
+if($firstname && $lastname && $username && $pass && $email && $address1 && $city && $state && $zipcode && $country != NULL){
 	if ($conn.query($sql) == TRUE) {
 		echo "Thank you for registering with us";
 		//check errors
@@ -136,16 +137,24 @@ if($firstname && $lastname && $username && $pass != NULL){
 	echo $firstnameErr . " ";	
 	echo $lastnameErr . " ";	
 	echo $usernameErr . " ";	
-	echo $passErr . " ";
+	echo $passErr . " ";	
+	echo $emailErr . " ";	
+	echo $addressErr . " ";	
+	echo $cityErr . " ";	
+	echo $stateErr . " ";	
+	echo $zipcodeErr . " ";
+	echo $countryErr . " ";
+		
 	//Database Connection OR Insertion errors used in Development
 		
-	echo " Error: " . $sql . "" . $conn.error ;
-	echo "Error: " . $sql . "" . mysqli_error($conn);		
+	//echo " Error: " . $sql . "" . $conn.error ;
+	//echo "Error: " . $sql . "" . mysqli_error($conn);		
 	?>
 	<a href = './register.html'><?php echo "Return "?></a><?php echo " to Registration Page, or use Browser 'Back' Button to enter missing information.";
 }
 
 $conn.close();
+echo "</br>";
 ?>
 
 Click <a href = "../index.php"> here </a> to return to the Main page, or 

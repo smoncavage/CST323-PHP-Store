@@ -6,25 +6,22 @@ Milestone 1
 27 February 2021
 -->
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors',1);
 //include auth_session.php file on all user panel pages
-//include("auth_session.php");
+include("auth_session.php");
 include '../views/layout_head.php';
-//sessCheck();
-//if($_SESSION["valid"] != 1){
-//	header("Location: ./login.php");
-//}
+sessCheck();
+if($_SESSION["valid"] != 1){
+	header("Location: ./login.php");
+}
 ?>
-<?php include '../../autoloader.php'; ?>
+<?php include('../../../autoloader.php');; ?>
 <body class = "body">
 
 <form class = "form3" method = "post" >  
  
 <?php
 function getAllUsers(){
-    $db = new Database();
-    $conn = $db->getConnection();
+    $conn = dbConnect();
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
         exit();
@@ -38,7 +35,7 @@ function getAllUsers(){
     $index = 0;
     while($row = mysqli_fetch_assoc($result)){
         $users[$index] = array(
-            $row["ID"], $row["First_Name"], $row["Last_Name"], $row["Username"], $row["Password"], $row["Email"], $row["Role_ID"], $row["Address_ID"], $row["Credit_ID"]
+            $row["ID"], $row["First_Name"], $row["Last_Name"]
         );
         ++$index;
     }
@@ -46,28 +43,27 @@ function getAllUsers(){
     return $users;
 }
 
-// if ($_SERVER["REQUEST_METHOD"] == "POST"){
-//     $searchPatternID = $_REQUEST["searchPatternID"];
-//     $searchPatternFirst=$_REQUEST["searchPatternFirst"];
-//     $searchPatternLast=$_REQUEST["searchPatternLast"];
-//     if($searchPatternID){
-//         echo "Searching by ID: " . $searchPatternID . "<br>";
-//         searchByID($searchPatternID);
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    $searchPatternID = $_REQUEST["searchPatternID"];
+    $searchPatternFirst=$_REQUEST["searchPatternFirst"];
+    $searchPatternLast=$_REQUEST["searchPatternLast"];
+    if($searchPatternID){
+        echo "Searching by ID: " . $searchPatternID . "<br>";
+        searchByID($searchPatternID);
         
-//     }
-//     elseif($searchPatternFirst){
-//         echo "Searching by First Name: " . $searchPatternFirst . "<br>";
-//         searchByFirst($searchPatternFirst);
-//     }
-//     elseif($searchPatternLast){
-//         echo "Searching by Last Name: " . $searchPatternLast . "<br>";
-//         searchByLast($searchPatternLast);
-//     }
-//     else{
-//         echo "No Results Found.";
-//     }
-// }
-
+    }
+    elseif($searchPatternFirst){
+        echo "Searching by First Name: " . $searchPatternFirst . "<br>";
+        searchByFirst($searchPatternFirst);
+    }
+    elseif($searchPatternLast){
+        echo "Searching by Last Name: " . $searchPatternLast . "<br>";
+        searchByLast($searchPatternLast);
+    }
+    else{
+        echo "No Results Found.";
+    }
+}
 ?>
 <br>
 <a href = "../views/search.html">Go Back</a>

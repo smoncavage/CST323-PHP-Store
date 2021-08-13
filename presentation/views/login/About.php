@@ -5,27 +5,16 @@ eCommerce Site Milestone Project
 Milestone 1
 27 February 2021
 -->
-<?php include 'layout_head.php';
+<?php
+include('auth_session.php');
+sessCheck();
+if($_SESSION["valid"] != 1){
+    header("Location: ./login.php");
+}
+?>
+<?php include './layout_head.php';
 include('../../../autoloader.php');?>
-<link rel = "stylesheet" href = "../css/style.css" type="text/css">
-<head>
-
-	<meta charset="UTF-8"> 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#ffffff">
-	
-	<link rel = "stylesheet" href = "../css/style.css" type="text/css">
-	
-	<title>Search Form</title>
-	<nav>
-		<a href="./index.php">Home</a>
-		<a href="./About.php">About</a>
-		<a href="./Contact.php">Contact</a>
-		<a href="./Store.php">Store</a>
-		<a href="./search.html">Search</a>
-	</nav>
-</head>
+<link rel = "stylesheet" href = "../../css/style.css">
 <body class = "body">
 
 <div class="container" id="main-content">

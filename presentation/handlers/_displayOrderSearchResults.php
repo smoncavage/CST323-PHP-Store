@@ -1,6 +1,6 @@
 
 <?php
-include_once '../../autoloader.php';
+include('../../../autoloader.php');
 
 
 ?>
@@ -57,7 +57,7 @@ include_once '../../autoloader.php';
 	</tr>
 	
 <?php
-
+$orders = $_REQUEST['orders'];
 for($x = 0; $x <count($orders); $x++){
 	echo "<tr>";
 	

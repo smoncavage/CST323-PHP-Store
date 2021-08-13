@@ -7,8 +7,7 @@ Milestone 5
 Receipt Creation Page
 -->
 <?php
-include 'db.php';
-include 'checkout.php';
+include('../../../autoloader.php');
 // set page title
 $page_title="Checkout";
 

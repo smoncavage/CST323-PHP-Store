@@ -8,12 +8,12 @@ Milestone 1
 
 <?php
 //include auth_session.php file on all user panel pages
-//include("auth_session.php");
+include("auth_session.php");
 //sessCheck();
-include_once '../../autoloader.php';
+include('../../../autoloader.php');
 ?>
-<?php include 'layout_head.php'; ?>
-<link rel = "stylesheet" href = "../css/style.css" type="text/css"/>
+<?php include '../views/layout_head.php'; ?>
+<link rel = "stylesheet" href = "../../css/style.css" type="text/css"/>
 <body class = "body">
 
     <div class="form">

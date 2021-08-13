@@ -1,17 +1,15 @@
 
 <?php
-include_once '../../autoloader.php';
-$prods = Array();
+include('../../../autoloader.php');
+
 
 ?>
 <head>
-<script 
-	src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-	integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
-	crossorigin="anonymous">
-</script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha256-3edrmyuQ0w665f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	<style>
 	#products {
 		font-family: "Trebuchet  MS", Arial, Helvetica, sans-serif;
@@ -41,8 +39,7 @@ $prods = Array();
 	}
 	</style>
 </head>
-<table id="products" class="display">
-	<thead>
+<table id="products">
 	<tr>
 	<th>
 	Product ID
@@ -60,25 +57,19 @@ $prods = Array();
 	Picture
 	</th>
 	</tr>
-	</thead>
-<tbody>
+	
 <?php
 
-for($x = 0; $x < count($prods); $x++){
+$products = $_REQUEST['products'];
+for($x = 0; $x <count($products); $x++){
 	echo "<tr>";
 	
-	echo "<td>".$prods[$x]['Product_ID']. "</td>";
-	echo "<td>".$prods[$x]['Product_Name']. "</td>";
-	echo "<td>".$prods[$x]['Product_Description']. "</td>";
-	echo "<td>".$prods[$x]['Product_Price']. "</td>";
-	echo "<td>".$prods[$x]['Product_Picture']. "</td>";
+	echo "<td>".$products[$x]['Product_ID']. "</td>";
+	echo "<td>".$products[$x]['Product_Name']. "</td>";
+	echo "<td>".$products[$x]['Product_Description']. "</td>";
+	echo "<td>".$products[$x]['Product_Price']. "</td>";
+	echo "<td>".$products[$x]['Product_Picture']. "</td>";
 	echo "</tr>";
 }
 ?>
-</tbody>
 </table>
-<script>
-$(document).ready)(function(){
-	$('#products').DataTable();
-});
-</script>

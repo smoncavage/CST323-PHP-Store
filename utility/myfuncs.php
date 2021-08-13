@@ -8,7 +8,7 @@ Milestone 1
 <?php
 //require_once('auth_session.php');
 //session_start();
-include '../database/db.php';
+
 if(!function_exists('saveUserId')){
 function saveUserId($username){
 	$_SESSION['curuser'] = $username;
@@ -37,8 +37,7 @@ function getTimeStamp(){
 
 if(!function_exists('checkUser')){
 function checkUser(){
-	$db = new Database();
-	$conn = $db->getConnection();
+	$conn = dbConnect();
 	//$user = stripslashes($_REQUEST['username']);    // removes backslashes
 	$username = $_SESSION['username'];
 	$user = mysqli_real_escape_string($conn, $username);
@@ -49,14 +48,14 @@ function checkUser(){
 	
 	
 	// Check user is exist in the database
-	$query = "SELECT * FROM ecommerce.users WHERE Username = '$user'";
+	$query = "SELECT * FROM `users` WHERE username = '$user'";
 	$result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 	//reset count
 	$count = 0;
 	$count = mysqli_num_rows($result);
 	
 	//Change to checking for a password stored as a hash. added 7/26/2020 S. Mocavage
-	$qry = "SELECT pass FROM ecommerce.users WHERE= '$user' ";
+	$qry = "SELECT pass FROM `users` WHERE username = '$user' ";
 	$result_hash = mysqli_query($conn, $qry) or die (mysqli_error($conn));
 	if(password_verify($password, $result_hash)){
 		$psvfy = 1;
@@ -107,8 +106,7 @@ function isSessionStarted()
 }
 if(!function_exists('isSessionStarted')){
 function getUsersByFirstName($search){
-	$db = new Database();
-	$conn = $db->getConnection(); 
+	$conn = dbConnect(); 
 	if (mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		exit();
@@ -134,8 +132,7 @@ function getUsersByFirstName($search){
 
 if(!function_exists('isSessionStarted')){
 function getUsersByLastName($search){
-	$db = new Database();
-	$conn = $db->getConnection(); 
+	$conn = dbConnect(); 
 	if (mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		exit();

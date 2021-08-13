@@ -15,31 +15,12 @@ Milestone 2
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors',1);
-include '../layout_head.php';
-include('./_displayAllProducts.php');
+include './layout_head.php';
 include('../../../autoloader.php');
-//displayAllProducts();
+getAllProducts();
 ?>
 <link rel = "stylesheet" href = "../css/style.css" type="text/css">
-<head>
-
-	<meta charset="UTF-8"> 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#ffffff">
-	
-	<link rel = "stylesheet" href = "../css/style.css" type="text/css">
-	
-	<title>Search Form</title>
-	<nav>
-		<a href="./index.php">Home</a>
-		<a href="./About.php">About</a>
-		<a href="./Contact.php">Contact</a>
-		<a href="./Store.php">Store</a>
-		<a href="./search.html">Search</a>
-	</nav>
-</head>
-<body class = "body" style="text-align:center" class="form2"> 
+<body style="text-align:center" class="form2"> 
 <div style="text-align:center" class="container" id="main-content">
 	<h3 class = "home-title" >Welcome to eCommerce!</h3> 
 	<div style="text-align:center" class="container">
@@ -55,7 +36,7 @@ include('../../../autoloader.php');
                         </tr>
                         </thead>
                         <tbody>
-                            <?php for($i = 0; $i < count($results->data); $i++) ?>
+                            <?php for( $i = 0; $i < count( $results->data ); $i++ ) : ?>
                     		<tr>
                             <td><?php echo $results->data[$i]['Product ID']; ?></td>
                             <td><?php echo $results->data[$i]['Product Name']; ?></td>

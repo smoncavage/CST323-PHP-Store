@@ -8,8 +8,7 @@ Milestone 3
 <?php
 session_start();
 
-include "myfuncs.php";
-include "db.php";
+include('../../../autoloader.php');
 
 function editUser($user){
     $rowId = $_SESSION['rowID'];

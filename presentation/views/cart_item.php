@@ -8,6 +8,7 @@ cart item
 Some portions based on code found on: https://codeofaninja.com/2015/08/simple-php-mysql-shopping-cart-tutorial.html
 -->
 <?php
+include('../../../autoloader.php');
 // 'cart item' object
 class CartItem{
  

@@ -6,13 +6,15 @@ Milestone 1
 27 February 2021
 -->
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors',1);
-include_once '../../autoloader.php';
-
+//include auth_session.php file on all user panel pages
+include("auth_session.php");
+include '../views/layout_head.php';
+sessCheck();
+if($_SESSION["valid"] != 1){
+	header("Location: ./login.php");
+}
 ?>
-<?php //include '../views/layout_head.php'; 
-	  include '../../database/db.php';?>
+<?php include('../../../autoloader.php');; ?>
 <body class = "body">
 
 <form class = "form3" method = "post" >  
@@ -21,8 +23,7 @@ include_once '../../autoloader.php';
 //include "myfuncs.php";
 
 function getAllProducts(){
-	$db = new Database();
-	$conn = $db->getConnection(); 
+	$conn = dbConnect(); 
 	if (mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		exit();
@@ -36,7 +37,7 @@ function getAllProducts(){
 	$index = 0;
 	while($row = mysqli_fetch_assoc($result)){
 		$products[$index] = array(
-			$row["Product_ID"], $row["Product_Name"], $row["Product_Description"], $row["Product_Price"], $row["Product_Picture"]
+			$row["ID"], $row["FIRST_NAME"], $row["LASTNAME"]
 		);
 		++$index;	
 	}
@@ -52,40 +53,61 @@ function getAllProducts(){
 	return $products;
 }
 
-function getProductsbyName($search){
-	$db = new Database();
-	$conn = $db->getConnection();  
+function getUsersByFirstName($search){
+	$conn = dbConnect(); 
 	if (mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		exit();
 	}
 	if($search == " "){
-		getAllProducts();
+		getAllUsers();
 	}else{
-		$query = " SELECT * FROM products WHERE 'Product_Name' LIKE '%$search%'";
+		$query = " SELECT * FROM users WHERE 'FIRST_NAME' LIKE '%$search%'";
 	}
 	$result = mysqli_query($conn, $query);
 	if(!$result){
 		die("Could not retrieve data: " . mysqli_error($conn));
 		return null;
 	}
-	$products = [];
+	$users = [];
 	$index = 0;
 	while($row = mysqli_fetch_assoc($result)){
-		$products[$index] = array(
-			$row["Product_ID"], $row["Product_Name"], $row["Product_Description"], $row["Product_Price"], $row["Product_Picture"]
+		$users[$index] = array(
+			$row["ID"], $row["FIRST_NAME"], $row["LASTNAME"], $row["USERNAME"]
 		);
 		++$index;	
-		return $products;
+		return $users;
 	}	
 	mysqli_close($conn);
 	
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+	$searchPattern = $_REQUEST["searchPattern"];
+	echo "Searching by: " . $searchPattern . "<br>";
+	$user = getUsersByFirstName($searchPattern);
+	//echo implode(",", $user);
+	//$rslt = [];
+	//$index = count($user);
+	if($user == null){
+		echo "<br> No results found. <br>";
+	}else{
+		foreach($user as $usr){
+		//for($i = 0; $i <= count($user); $i++){
+			//for($j = 0; $j <= count($row); $j++){
+			echo "<br> User Id: " . $usr[0] . " First Name: " . $usr[1] . " Last Name: " . $usr[2] . " Username: " . $usr[3] . "<br>";
+			//}
+		}
+		//echo "<ul><li>" . implode("</li><li>", $user) . "</li></ul>";
+		echo "<br>";
+		//print_r($user);
+	}
+	
+}
 ?>
 <br>
-<a href = "./search.html">Go Back</a>
+<a href = "../views/search.html">Go Back</a>
 </form>
 </body>
-<?php //include 'layout_foot.php'; ?>
+<?php include 'layout_foot.php'; ?>
 </html>

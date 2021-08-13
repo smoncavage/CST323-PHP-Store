@@ -19,7 +19,7 @@ Milestone 1
 		$sessTime = getTimeStamp() + (15 * 60);
 		$now = strtotime(time());
 		if(!$sessTime){
-			header("Location: /CST236-Activity/eCommerceSite/presentation/views/login/login.php");
+			header("Location: ./logout.php");
 		}else{
 			
 			if($now <= ($sessTime)){
@@ -32,13 +32,13 @@ Milestone 1
 				//session_destroy();
 				$_SESSION['valid'] = 2;
 				echo "Session has Expired ";
-				header('Location: /CST236-Activity/eCommerceSite/presentation/views/login/logout.php');
+				header('Location: ./logout.php');
 			//}
 			}
 		}
 	}	
 	
-	while(time() >= ($_SESSION['sess_time'] + (5 * 60))){
-		startSess();
-	}
+	//while(time() >= ($_SESSION['sess_time'] + (5 * 60))){
+	//	startSess();
+	//}
 ?>

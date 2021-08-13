@@ -15,7 +15,7 @@ if($_SESSION["valid"] != 1){
 	header("Location: ./login.php");
 }
 ?>
-<?php include '../../autoloader.php'; ?>
+<?php include('../../../autoloader.php');; ?>
 <body class = "body">
 
 <form class = "form3" method = "post" >  
@@ -35,7 +35,7 @@ function getAllOrders(){
     $orders = [];
     $index = 0;
     while($row = mysqli_fetch_assoc($result)){
-        $users[$index] = array(
+        $orders[$index] = array(
             $row["ID"], $row["First_Name"], $row["Last_Name"]
         );
         ++$index;
@@ -70,9 +70,9 @@ function getOrdersbyDate($date){
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $searchPatternOrder_ID = $_REQUEST["searchPatternID"];
     $searchPatternFirst=$_REQUEST["searchPatternDate"];
-    if($searchPatternID){
-        echo "Searching by ID: " . $searchPatternID . "<br>";
-        searchByID($searchPatternID);
+    if($searchPatternOrder_ID){
+        echo "Searching by ID: " . $searchPatternOrder_ID . "<br>";
+        searchByID($searchPatternOrder_ID);
         
     }
     elseif($searchPatternFirst){

@@ -9,8 +9,7 @@ Some portions based on code found on: https://codeofaninja.com/2015/08/simple-ph
 <?php
 session_start();
 
-include "myfuncs.php";
-include "db.php";
+include('../../../autoloader.php');
 
 function deleteUser(){
     $rowId = $_SESSION['rowID'];
@@ -49,6 +48,6 @@ function deleteProductFromCart(){
     $cart_item->delete();
     
     // redirect to product list and tell the user it was added to cart
-    header('Location: cart.php?action=removed&id=' . $id);
+    header('Location: cart.php?action=removed&id=' . $product_id);
 }
 ?>
