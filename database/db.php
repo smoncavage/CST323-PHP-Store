@@ -3,12 +3,18 @@ error_reporting(E_ALL);
 ini_set('display_errors',1);
 class Database{
  
-    // specify your own database credentials
-    private $host = "localhost";
+    // specify your own database credentials 
+    /*private $host = "localhost";
     private $db_name = "ecommerce";
     private $username = "root";
     private $password = "root";
-    public $conn;
+    public $conn; */
+	
+	private $host = "cst323php.mysql.database.azure.com";
+    private $db_name = "appdata";
+    private $username = "adminuser";
+    private $password = "NaVy.2005";
+	public $conn;
  
     // get the database connection
     public function getConnection(){
@@ -32,10 +38,10 @@ function dbConnect(){
 			//
 		 // Enter your host name, database username, password, and database name.
 		// If you have not set database password on localhost then set empty.
-		$servername = "localhost";
-		$user = "root";
-		$password = "root";
-		$datbas = "ecommerce";
+		$servername = "cst323php.mysql.database.azure.com";
+		$user = "adminuser";
+		$password = "NaVy.2005";
+		$datbas = "appdata";
 		
 		//Create Connection
 
