@@ -5,7 +5,10 @@ eCommerce Site Milestone Project
 Milestone 1
 27 February 2021
 -->
-<?php include '../layout_head.php'; ?>
+<?php 
+include '../layout_head.php'; 
+include '../navigation.php';
+?>
 <link rel = "stylesheet" href = "../../css/style.css" type="text/css">
 <body class="form2"> 
 <?php
