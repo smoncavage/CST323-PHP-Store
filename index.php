@@ -5,8 +5,7 @@ eCommerce Site Milestone Project
 Milestone 1
 27 February 2021
 -->
-<?php include './presentation/views/layout_head.php'; ?>
-<link rel = "stylesheet" href = "./presentation/css/style.css" type="text/css"/>
+<?php include 'layout_head.php'; ?>
 <body class = "body">
 
 <div class="container" id="main-content">
@@ -17,9 +16,9 @@ Milestone 1
 </div>
 
 	<br>
-	<a href="./presentation/views/login/login.php"> <input type = "submit" name = "login" value = "Login"/> </a>
-	<a href="./presentation/views/login/register.html"> <input type = "submit" name = "register" value = "Register" /> </a>
+	<a href="./login.php"> <input type = "submit" name = "login" value = "Login"/> </a>
+	<a href="./register.html"> <input type = "submit" name = "register" value = "Register" /> </a>
 
 </body>
-<?php include './presentation/views/layout_foot.php'; ?>
+<?php include 'layout_foot.php'; ?>
 </html>

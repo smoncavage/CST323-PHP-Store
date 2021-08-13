@@ -9,7 +9,7 @@ Some portions based on code found on: https://codeofaninja.com/2015/08/simple-ph
 -->
 <?php
 include('auth_session.php');
-require_once '../../autoloader.php';
+include('../../../autoloader.php');
 require_once './layout_head.php';
 ?>
 <link rel ="stylesheet" type="text/css" href="../css/tables.css">
@@ -22,7 +22,7 @@ if($_SESSION["valid"] != 1){
 include 'db.php';
 include_once 'cart_item.php';
 
-$page_title="Cart";
+//$page_title="Cart";
 
 include 'layout_head.php';
 
@@ -66,6 +66,7 @@ else if($action=='unable_to_update'){
 }
 echo "</div>";
 
+$cart_count=$_REQUEST['cartcount'];
 // $cart_count variable is initialized in navigation.php
 if($cart_count>0){
     
@@ -186,14 +187,15 @@ if(isset($_GET["action"]))
 ?>
 	<body>
 		<br />
-		<div class="container">
+	<div class="container">
 		<br />
 		<br />
 		<br />
 		<h3 align="center">Shoping Cart</h3><br />
 		<br /><br />
 		<?php
-		$conn = dbConnect();
+        $db = new Database();
+		$conn = $db->dbConnect();
 		$query = "SELECT * FROM products ORDER BY id ASC";
 		$result = mysqli_query($conn, $query);
 		if(mysqli_num_rows($result) > 0)
@@ -266,7 +268,8 @@ if(isset($_GET["action"]))
 		
 		</table>
 		</div>
-	</div>
+		</div>
+	
 	<br />
 	</body>
 	<?php include './layout_foot.php'; ?>

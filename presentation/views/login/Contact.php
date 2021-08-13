@@ -15,24 +15,6 @@ include('../../../autoloader.php');
 ?>
 <?php include './layout_head.php';?>
 <link rel = "stylesheet" href = "../css/style.css" type="text/css">
-<head>
-
-	<meta charset="UTF-8"> 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#ffffff">
-	
-	<link rel = "stylesheet" href = "../css/style.css" type="text/css">
-	
-	<title>Search Form</title>
-	<nav>
-		<a href="./index.php">Home</a>
-		<a href="./About.php">About</a>
-		<a href="./Contact.php">Contact</a>
-		<a href="./Store.php">Store</a>
-		<a href="./search.html">Search</a>
-	</nav>
-</head>
 <body class = "body">
 <div class="container" id="main-content">
 	<h3 class = "home-title" >Welcome to eCommerce!</h3>

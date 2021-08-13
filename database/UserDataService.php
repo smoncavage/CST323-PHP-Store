@@ -5,11 +5,10 @@ Milestone 2
 06 March 2021
 -->
 <?php
-include('db.php');
+include('../../autoloader.php');
 class UserDataService{
     function findByFirstName($search){
-        $db = new Database();
-        $conn = $db->getConnection();
+        $conn = dbConnect();
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
             exit();
@@ -17,25 +16,22 @@ class UserDataService{
         $query = " SELECT * FROM ecommerce.users Where First_Name like '%$search%'";
         $result = mysqli_query($conn, $query);
         if(!$result){
-				echo "Current query has an error of: " .mysqli_error($query);
-				return null;
-				exit;
-		}
-		if($result->num_rows ==0){
-			return null;
+            die("Could not retrieve data: " . mysqli_error($conn));
         }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
+        $users = [];
+        $index = 0;
+        while($row = mysqli_fetch_assoc($result)){
+            $users[$index] = array(
+                $row["ID"], $row["First_Name"], $row["Last_Name"]
+            );
+            ++$index;
+        }
+        mysqli_close($conn);
+        displayAllUsers($users);
     }
     
     function findByLastName($search){
-        $db = new Database();
-        $conn = $db->getConnection();
+        $conn = dbConnect();
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
             exit();
@@ -43,52 +39,44 @@ class UserDataService{
         $query = " SELECT * FROM ecommerce.users Where Last_Name like '%$search%'";
         $result = mysqli_query($conn, $query);
         if(!$result){
-				echo "Current query has an error of: " .mysqli_error($query);
-				return null;
-				exit;
-		}
-		if($result->num_rows ==0){
-			return null;
+            die("Could not retrieve data: " . mysqli_error($conn));
+        }$users = [];
+        $index = 0;
+        while($row = mysqli_fetch_assoc($result)){
+            $users[$index] = array(
+                $row["ID"], $row["First_Name"], $row["Last_Name"]
+            );
+            ++$index;
         }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
+        mysqli_close($conn);
+        displayAllUsers($users);
     }
     
     function findByID($search){
-        $db = new Database();
-        $conn = $db->getConnection();
+        $conn = dbConnect();
         $serch=intval($search);
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
             exit();
         }
-        $query = " SELECT * FROM ecommerce.users Where ID like '%$serch%'";
+        $query = " SELECT * FROM ecommerce.users Where ID like '%$search%'";
         $result = mysqli_query($conn, $query);
         if(!$result){
-				echo "Current query has an error of: " .mysqli_error($query);
-				return null;
-				exit;
-		}
-		if($result->num_rows ==0){
-			return null;
+            die("Could not retrieve data: " . mysqli_error($conn));
+        }$users = [];
+        $index = 0;
+        while($row = mysqli_fetch_assoc($result)){
+            $users[$index] = array(
+                $row["ID"], $row["First_Name"], $row["Last_Name"]
+            );
+            ++$index;
         }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
+        mysqli_close($conn);
+        displayAllUsers($users);
     }
 	
     function findByUsername($search){
-        $db = new Database();
-        $conn = $db->getConnection();
+        $conn = dbConnect();
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
             exit();
@@ -96,25 +84,21 @@ class UserDataService{
         $query = " SELECT * FROM ecommerce.users Where Username like '%$search%'";
         $result = mysqli_query($conn, $query);
         if(!$result){
-				echo "Current query has an error of: " .mysqli_error($query);
-				return null;
-				exit;
-		}
-		if($result->num_rows ==0){
-			return null;
+            die("Could not retrieve data: " . mysqli_error($conn));
+        }$users = [];
+        $index = 0;
+        while($row = mysqli_fetch_assoc($result)){
+            $users[$index] = array(
+                $row["ID"], $row["First_Name"], $row["Last_Name"], $row["Username"]
+            );
+            ++$index;
         }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
+        mysqli_close($conn);
+        displayAllUsers($users);
     }
     
     function findByRole($search){
-        $db = new Database();
-        $conn = $db->getConnection();
+        $conn = dbConnect();
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
             exit();
@@ -122,25 +106,21 @@ class UserDataService{
         $query = " SELECT * FROM ecommerce.users Where Username like '%$search%'";
         $result = mysqli_query($conn, $query);
         if(!$result){
-				echo "Current query has an error of: " .mysqli_error($query);
-				return null;
-				exit;
-		}
-		if($result->num_rows ==0){
-			return null;
+            die("Could not retrieve data: " . mysqli_error($conn));
+        }$users = [];
+        $index = 0;
+        while($row = mysqli_fetch_assoc($result)){
+            $users[$index] = array(
+                $row["ID"], $row["First_Name"], $row["Last_Name"], $row["Username"]
+            );
+            ++$index;
         }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
+        mysqli_close($conn);
+        displayAllUsers($users);
     }
     
     function findByAddressID($search){
-        $db = new Database();
-        $conn = $db->getConnection();;
+        $conn = dbConnect();
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
             exit();
@@ -148,24 +128,21 @@ class UserDataService{
         $query = " SELECT * FROM ecommerce.users Where Address_ID like '%$search%'";
         $result = mysqli_query($conn, $query);
         if(!$result){
-				echo "Current query has an error of: " .mysqli_error($query);
-				return null;
-				exit;
-		}
-		if($result->num_rows ==0){
-			return null;
+            die("Could not retrieve data: " . mysqli_error($conn));
+        }$users = [];
+        $index = 0;
+        while($row = mysqli_fetch_assoc($result)){
+            $users[$index] = array(
+                $row["ID"], $row["First_Name"], $row["Last_Name"], $row["Username"]
+            );
+            ++$index;
         }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
+        mysqli_close($conn);
+        displayAllUsers($users);
     }
+    
     function findByCreditID($search){
-        $db = new Database();
-        $conn = $db->getConnection();
+        $conn = dbConnect();
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
             exit();
@@ -173,137 +150,56 @@ class UserDataService{
         $query = " SELECT * FROM ecommerce.users Where Credit_ID like '%$search%'";
         $result = mysqli_query($conn, $query);
         if(!$result){
-				echo "Current query has an error of: " .mysqli_error($query);
-				return null;
-				exit;
-		}
-		if($result->num_rows ==0){
-			return null;
+            die("Could not retrieve data: " . mysqli_error($conn));
+        }$users = [];
+        $index = 0;
+        while($row = mysqli_fetch_assoc($result)){
+            $users[$index] = array(
+                $row["ID"], $row["First_Name"], $row["Last_Name"], $row["Username"]
+            );
+            ++$index;
         }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
+        mysqli_close($conn);
+        displayAllUsers($users);
     }
     
 	function deleteItem($id){
-		$db = new Database();
-        $conn = $db->getConnection();
-        $serch=intval($id);
-        if (mysqli_connect_errno()) {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-            exit();
-        }
-        $query = " DELETE FROM ecommerce.users Where ID like '%$serch%'";
-        $result = mysqli_query($conn, $query);
-        if(!$result){
-				echo "Current query has an error of: " .mysqli_error($query);
-				return null;
-				exit;
-		}
-		if($result->num_rows ==0){
-			return null;
-        }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
-    }
+		
+	}
 	
 	function updateOne($id, $person){
-		$db = new Database();
-        $conn = $db->getConnection();
-        if (mysqli_connect_errno()) {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-            exit();
-        }
-        $query = " Update ecommerce.users SET First_Name = ".$person[0].", Last_Name = ".$person[1]." FROM ecommerce.users Where ID like '%$id%'";
-        $result = mysqli_query($conn, $query);
-        if(!$result){
-				echo "Current query has an error of: " .mysqli_error($query);
-				return null;
-				exit;
-		}
-		if($result->num_rows ==0){
-			return null;
-        }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
-    }
+		
+	}
 	
 	function findByFirstNameWithAddress($n){
-		//$n = search string
-		$db = new Database();
-        $conn = $db->getConnection();
-		$qry = $conn->prepare("SELECT ID,  First_Name, Last_Name, Street, Street2, City, State, Postal_Code
-				FROM users
-				JOIN address
-				ON users.Address_ID = address.Address_ID
+			//$n = search string
+			$conn= dbConnect();
+			$qry = $conn->prepare("SELECT USERS.ID, ISDEFAULT, First_Name, Last_Name, STREET, CITY, STATE, POSTALCODE
+				FROM USERS
+				JOIN ADDRESSES
+				ON USERS.id = ADDRESSES.USERS_id
 				WHERE First_Name LIKE ?");
-		if(!$qry){
-			echo "Could not bind tables together." . mysqli_error($conn);
-			exit;
-		}
+			if(!$qry){
+				echo "Could not bind tables together." .mysqli_error;
+				exit;
+			}
 			
-		$like_n = "%".$n."%";
-		$qry->bind_param("s", $like_n);
+			$like_n = "%".$n."%";
+			$qry->bind_param("s", $like_n);
 			
-		$qry->execute();
+			$qry->execute();
 			
-		$result = $qry->get_result();
+			$result = $qry->get_result();
 			
-		if(!$result){
-			echo "Current query has an error of: " .mysqli_error($qry);
-			return null;
-			exit;
-		}
-		if($result->num_rows ==0){
-			return null;
-        }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
-    }
-    
-    function findAllPersons(){
-        $db = new Database();
-        $conn = $db->getConnection();
-        if (mysqli_connect_errno()) {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-            exit();
-        }
-        $query = "SELECT * FROM ecommerce.users";
-        $result = mysqli_query($conn, $query);
-        if(!$result){
-				echo "Current query has an error of: " .mysqli_error($qry);
+			if(!$result){
+				echo "Current query has an error of: " .mysqli_error;
 				return null;
 				exit;
-		}
-		if($result->num_rows ==0){
-			return null;
-        }
-        else{
-            $person_array = [];
-            while($person = $result->fetch_assoc()){
-                array_push($person_array, $person);
-            }
-            return $person_array;
-        }      
-    }
+			}
+			if($result->num_rows ==0){
+				return null;
+				exit;
+			}
+	}
 }
 ?>

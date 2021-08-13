@@ -17,14 +17,7 @@ Some portions based on code found on: https://codeofaninja.com/2015/08/simple-ph
 <meta name="theme-color" content="#ffffff">
 <title><?php echo isset($page_title) ? $page_title : "eCommerce"; ?></title>
 <link rel="stylesheet" href="style.css"/>
-	<nav>
-		<a href="./Home.php">Home</a>
-		<a href="./About.php">About</a>
-		<a href="./Contact.php">Contact</a>
-		<a href="./Store.php">Store</a>
-		<a href="./search.html">Search</a>
-	</nav>
 </head>
 
 <body class = "body">
-<?php include './navigation.php'; ?>
+<?php include 'navigation.php'; ?>

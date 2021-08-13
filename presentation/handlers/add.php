@@ -10,7 +10,7 @@ Some portions based on code found on: https://codeofaninja.com/2015/08/simple-ph
 <?php
 session_start();
 
-include_once '../../autoloader.php';
+include('../../../autoloader.php');
 
 function addUser($user){
     $rowId = $_SESSION['rowID'];
@@ -35,9 +35,9 @@ function addProductToCart($product, $rowId){
  
     // make quantity a minimum of 1
     $quantity=$quantity<=0 ? 1 : $quantity;
-    
+    $cart_item = [];
     // set cart item values
-    $cart_item->user_id=1; // we default to '1' because we do not have logged in user
+    $cart_item->user_id; // we default to '1' because we do not have logged in user
     $cart_item->product_id=$product_id;
     $cart_item->quantity=$quantity;
     

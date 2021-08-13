@@ -20,7 +20,13 @@ Form handler for Registration Module in HTML
 	<link rel = "stylesheet" href = "../../css/style.css">
 	
 	<title>Registration Form</title>
-<?php include '../navigation.php'; ?>
+	<nav>
+		<a href="../index.php">Home</a>
+		<a href="../About.php">About</a>
+		<a href="../Contact.php">Contact</a>
+		<a href="../Store.php">Store</a>
+		<a href="../search.html">Search</a>
+	</nav>
 </head>
 
 <body id = "text-align">
@@ -39,7 +45,7 @@ Form handler for Registration Module in HTML
 	<b>Address Line 1:</b> <input class = "login-input" type = "text" name = "address1" placeholder="123 East Ave" />
 	<b>Address Line 2:</b> <input class = "login-input" type = "text" name = "address2" placeholder = "optional"/>
 	<b>City:</b> <input class = "login-input" type = "text" name = "city"   />
-	<b>State:</b> <select id="state" name="state">
+	<b>State:</b> <select id="state" name="state"  />
 	<option value="Not Selected" selected>Not Selected</option>
 	<option value="AL">AL</option>
 	<option value="AK">AK</option>
@@ -104,7 +110,7 @@ Form handler for Registration Module in HTML
 	</select>
 	<br>
 	<b>Zipcode:</b> <input class = "login-input" type = "text" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$" name = "zipcode" placeholder="12345" />
-	<b>Country:</b> <select id="country" name = "country"> 
+	<b>Country:</b> <select id="country" name = "country" /> 
 	<option value="Not Selected">Not Selected</option>
 	<option value="US">United States</option>
 	<option value="UM">United States Minor Outlying Islands</option>
@@ -112,15 +118,16 @@ Form handler for Registration Module in HTML
 	<br>
 	* Must be within the United States or it's territories to use this product. *
 	<br>
-	<b>Account Type:</b> <select id="role" name = "role" >
+	<b>Account Type:</b> <select id="role" name = "role"  />
     <option value = "General" selected>General</option>
     <option value = "Admin">Admin</option>
     <option value = "SuperAdmin">SuperAdmin</option>
 	</select>
 	<br>
 	<input class = "login-button" type = "submit" name = "submit" value = "Submit" />
-	<a href = "./index.php"> <h1><b>Cancel</b></h1> </a>
+	<a href = "./index.php"> <h1><b>Cancel</b><h1> </a>
 	</form>
+	</p>
 	</article>
 </body>
 <footer>

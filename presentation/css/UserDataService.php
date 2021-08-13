@@ -5,8 +5,7 @@ Milestone 2
 06 March 2021
 -->
 <?php
-include('Database.php');
-include('_displayAllUsers.php');
+include('../../../autoloader.php');
 class UserDataService{
     function findByFirstName($search){
         $conn = dbConnect();
@@ -60,7 +59,7 @@ class UserDataService{
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
             exit();
         }
-        $query = " SELECT * FROM ecommerce.users Where ID like '%$search%'";
+        $query = " SELECT * FROM ecommerce.users Where ID like '%$serch%'";
         $result = mysqli_query($conn, $query);
         if(!$result){
             die("Could not retrieve data: " . mysqli_error($conn));

@@ -1,4 +1,4 @@
-<!--
+!--
 Stephan Moncavage
 CST-236
 Milestone 2
@@ -6,39 +6,23 @@ Milestone 2
 -->
 
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors',1);
-
-require_once '../../autoloader.php';
-include '../../database/ProductDataService.php';
+include('../../autoloader.php');
 class ProductBusinessService{
     function searchByName($pattern){
-        $products = Array();
         $service = new ProductDataService();
-        $products = $service->findByProductName($pattern);
-        return $products;
+        return $service->findByProductName($pattern);
     }
 
     function searchByPrice($pattern){
-        $products = Array();
         $service = new ProductDataService();
-        $products = $service->findByPrice($pattern);
-        return $products;
+        return $service->findByPrice($pattern);
     }
 
     function searchByID($pattern){
-        $products = Array();
         $service = new ProductDataService();
-        $products = $service->findByProductID($pattern);
-        return $products;
+        return $service->findByProductID($pattern);
     }
 
-    function returnAllProd(){
-        $products = Array();
-        $service = new ProductDataService();
-        $products = $service->returnAllProducts();
-        return $products;
-    }
 }
 ?>
 

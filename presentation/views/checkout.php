@@ -8,15 +8,16 @@ Checkout from Cart
 Some portions based on code found on: https://codeofaninja.com/2015/08/simple-php-mysql-shopping-cart-tutorial.html
 -->
 <?php
-include_once 'autoloader.php';
+include('../../../autoloader.php');
 // connect to database
-include 'db.php';
+//include 'db.php';
 //get items in cart
-include_once "cart_item.php";
+//include_once "cart_item.php";
 //send information to reciept.php after checkout complete
-include 'reciept.php';
+//include 'reciept.php';
 // get database connection
-$db = dbConnect();
+$db = new Database();
+$conn=$db->dbConnect();
 
 if(isset($_SESSION['cart'])&&(isset($_SESSION['id']))){
     $cart=$_SESSION['cart'];

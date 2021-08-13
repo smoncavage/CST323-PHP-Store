@@ -1,17 +1,12 @@
-<!--
+!--
 Stephan Moncavage
 CST-236
 Milestone 2
 06 March 2021
-User Business Service
 -->
 
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors',1);
-
-require_once '../../autoloader.php';
-include '../../database/UserDataService.php';
+include('../../autoloader.php');
 class UserBusinessService{
     function searchByFirst($pattern){
         $persons = Array();
@@ -59,20 +54,6 @@ class UserBusinessService{
         $persons = Array();
         $service = new UserDataService();
         $persons = $service->findByCreditID($pattern);
-        return $persons;
-    }
-
-    function findByFirstNameWithAddress($pattern){
-        $persons = Array();
-        $service = new UserDataService();
-        $persons = $service->findByFirstNameWithAddress($pattern);
-        return $persons;
-    }
-
-    function returnAllPersons(){
-        $persons = Array();
-        $service = new UserDataService();
-        $persons = $service->findAllPersons();
         return $persons;
     }
 }

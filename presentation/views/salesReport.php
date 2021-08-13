@@ -8,7 +8,7 @@ Milestone 6
 <link rel = "stylesheet" href = "../../css/style.css" type="text/css"/>
 <?php
 include('auth_session.php');
-include '../../autoloader.php';
+include('../../../autoloader.php');
 sessCheck();
 if($_SESSION["valid"] != 1){
     header("Location: ./login/login.php");

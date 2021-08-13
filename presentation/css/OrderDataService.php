@@ -5,8 +5,7 @@ Milestone 6
 04 April 2021
 -->
 <?php
-include('../../database/db.php');
-include('_displayAllOrders.php');
+include('../../../autoloader.php');
 class OrderDataService{
     function findByOrderDate($search){
         $conn = dbConnect();
@@ -38,7 +37,7 @@ class OrderDataService{
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
             exit();
         }
-        $query = " SELECT * FROM ecommerce.products Where ID like '%$search%'";
+        $query = " SELECT * FROM ecommerce.products Where ID like '%$serch%'";
         $result = mysqli_query($conn, $query);
         if(!$result){
             die("Could not retrieve data: " . mysqli_error($conn));

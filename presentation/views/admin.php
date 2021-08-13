@@ -12,6 +12,7 @@ sessCheck();
 if($_SESSION["valid"] != 1){
 	header("Location: ./login.php");
 }
+include('../../../autoloader.php');
 ?>
 
 <?php include 'layout_head.php'; ?>
@@ -55,6 +56,7 @@ while($row = mysqli_fetch_array($result)) {
 		</td>
     </tr>
 <?php
+echo "<br/>";
 $i++;
 }
 ?>

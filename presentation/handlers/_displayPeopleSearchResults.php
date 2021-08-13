@@ -1,18 +1,14 @@
 
 <?php
-include_once '../../autoloader.php';
-
+include('../../../autoloader.php');
 
 ?>
 <head>
-<script
-	src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-	integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
-	crossorigin="anonymous">
-</script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"> 
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>	
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha256-3edrmyuQ0w665f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	<style>
 	#customers {
 		font-family: "Trebuchet  MS", Arial, Helvetica, sans-serif;
@@ -69,12 +65,15 @@ include_once '../../autoloader.php';
 	<th>
 	Zip Code
 	</th>
+	<th>
+	Default?
+	</th>
 	</tr>
 	</thead>
 	<tbody>
 <?php
-
-for($x = 0; $x < count($persons); $x++){
+$persons = $_REQUEST['persons'];
+for($x = 0; $x <count($persons); $x++){
 	echo "<tr>";
 	
 	echo "<td>".$persons[$x]['ID']. "</td>";
@@ -85,6 +84,7 @@ for($x = 0; $x < count($persons); $x++){
 	echo "<td>".$persons[$x]['City']. "</td>";
 	echo "<td>".$persons[$x]['State']. "</td>";
 	echo "<td>".$persons[$x]['Postal_Code']. "</td>";
+	echo "<td>".$persons[$x]['Default_Id']. "</td>";
 	
 	echo "</tr>";
 }
