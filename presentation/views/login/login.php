@@ -59,11 +59,11 @@ include '../navigation.php';
         <a href = "./login.php" ><input class = "login-button" type ="submit" value ="Login" name ="login"/></a>
 		<br>
 		<br>
-		<a href = "../index.php">Cancel</a>
+		<a href = "../../../index.php">Cancel</a>
         <br>
 		<br>
 		<a href = "./register.html">New Registration</a>
 	</form>
 </body>
-<?php include '.././layout_foot.php'; ?>
+<?php include '../layout_foot.php'; ?>
 </html>
