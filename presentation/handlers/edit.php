@@ -11,20 +11,40 @@ session_start();
 include('../../../autoloader.php');
 
 function editUser($user){
-    $rowId = $_SESSION['rowID'];
-    $conn = dbConnect();
-    $query = "Update ".$user. " FROM users WHERE id = '$rowId' ";
-    $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
-    header("Location: ./Store.php");
+	try{
+		$rowId = $_SESSION['rowID'];
+		$conn = dbConnect();
+		$query = "Update ".$user. " FROM users WHERE id = '$rowId' ";
+		$result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+		throw new Exception("User Database Updated: ", 202);
+		header("Location: ./Store.php");
+	}catch (Exception $e){
+		$datetime = new DateTime();
+		$datetime->setTimezone(new DateTimeZone('UTC'));
+		$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+			
+		//log to default error_log destination
+		error_log($logentry);
+	}
     return $result;
 }
 
 function editProduct($product){
+	try{
     $rowId = $_SESSION['rowID'];
     $conn = dbConnect();
     $query = "UPDATE ".$product. " FROM products WHERE id = '$rowId' ";
     $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+	throw new Exception("Product Database Updated: ", 202);
     header("Location: ./Store.php");
+	}catch (Exception $e){
+		$datetime = new DateTime();
+		$datetime->setTimezone(new DateTimeZone('UTC'));
+		$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+			
+		//log to default error_log destination
+		error_log($logentry);
+	}
     return $result;
 }
 

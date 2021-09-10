@@ -122,30 +122,40 @@ $password = password_hash($pass, PASSWORD_DEFAULT);
 $sql = "INSERT INTO ecommerce.users (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD)
 VALUES ('$firstname','$lastname','$username', '$password')";
 
-//Validate Statement and execute
-if($firstname && $lastname && $username && $pass != NULL){
-	if ($conn.query($sql) == TRUE) {
-		echo "Thank you for registering with us";
-		//check errors
-		if($firstnameErr && $lastnameErr && $usernameErr && $passErr && $emailErr && $addressErr && $cityErr && $stateErr && $zipcodeErr && $countryErr == NULL){	
-			echo "Information is in correct Format.";
-		}	
+try{
+	//Validate Statement and execute
+	if($firstname && $lastname && $username && $pass != NULL){
+		if ($conn.query($sql) == TRUE) {
+			echo "Thank you for registering with us";
+			//check errors
+			if($firstnameErr && $lastnameErr && $usernameErr && $passErr && $emailErr && $addressErr && $cityErr && $stateErr && $zipcodeErr && $countryErr == NULL){	
+				echo "Information is in correct Format.";
+			}
+			throw new Exception("New User Registered: ", 202);
+		}
+	}else {
+		//Error List
+		echo "Error: ";
+		echo $firstnameErr . " ";	
+		echo $lastnameErr . " ";	
+		echo $usernameErr . " ";	
+		echo $passErr . " ";
+		//Database Connection OR Insertion errors used in Development
+			
+		echo " Error: " . $sql . "" . $conn.error ;
+		echo "Error: " . $sql . "" . mysqli_error($conn);	
+		throw new Exception("User Registration Failed: " . ' ' . mysqli_error($conn), 202);
+		?>
+		<a href = './register.html'><?php echo "Return "?></a><?php echo " to Registration Page, or use Browser 'Back' Button to enter missing information.";
 	}
-}else {
-	//Error List
-	echo "Error: ";
-	echo $firstnameErr . " ";	
-	echo $lastnameErr . " ";	
-	echo $usernameErr . " ";	
-	echo $passErr . " ";
-	//Database Connection OR Insertion errors used in Development
-		
-	echo " Error: " . $sql . "" . $conn.error ;
-	echo "Error: " . $sql . "" . mysqli_error($conn);		
-	?>
-	<a href = './register.html'><?php echo "Return "?></a><?php echo " to Registration Page, or use Browser 'Back' Button to enter missing information.";
-}
-
+	}catch (Exception $e){
+		$datetime = new DateTime();
+		$datetime->setTimezone(new DateTimeZone('UTC'));
+		$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+			
+		//log to default error_log destination
+		error_log($logentry);
+	}
 $conn.close();
 ?>
 

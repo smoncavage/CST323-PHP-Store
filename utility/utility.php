@@ -11,14 +11,34 @@ require_once 'myfuncs.php';
 include_once '../../autoloader.php';
 function getAllUsers(){
 	$conn = dbConnect(); 
-	if (mysqli_connect_errno()) {
-		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		exit();
-	}
-	$query = " SELECT ID, FIRST_NAME, LASTNAME FROM users ";
-	$result = mysqli_query($conn, $query);
-	if(!$result){
-		die("Could not retrieve data: " . mysqli_error($conn));
+	try{
+		if (mysqli_connect_errno()) {
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			throw new Exception("SQL Query Failed - Could not connect to DB: " . mysqli_error($conn), 302);
+			exit();
+		}
+	}catch (Exception $e){
+		$datetime = new DateTime();
+		$datetime->setTimezone(new DateTimeZone('UTC'));
+		$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+		
+		//log to default error_log destination
+		error_log($logentry);
+	}	
+	try{	
+		$query = " SELECT ID, FIRST_NAME, LASTNAME FROM users ";
+		$result = mysqli_query($conn, $query);
+		if(!$result){
+			die("Could not retrieve data: " . mysqli_error($conn));
+			throw new Exception("SQL Query Failed - Could not retreieve data: " . mysqli_error($conn), 302);
+		}
+	}catch (Exception $e){
+		$datetime = new DateTime();
+		$datetime->setTimezone(new DateTimeZone('UTC'));
+		$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+		
+		//log to default error_log destination
+		error_log($logentry);
 	}
 	$users = [];
 	$index = 0;

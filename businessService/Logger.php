@@ -6,6 +6,7 @@ Logging Module
 */
 /* 
 https://www.loggly.com/ultimate-guide/php-logging-basics/
+
 Directive 	Default 	Recommended 	Description
 display_errors ** 	1 	0 	Defines whether errors are included in output.
 display_startup_errors 	0 	0 	Whether to display PHP startup sequence errors.

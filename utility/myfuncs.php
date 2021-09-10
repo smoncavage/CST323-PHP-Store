@@ -57,29 +57,40 @@ function checkUser(){
 	//Change to checking for a password stored as a hash. added 7/26/2020 S. Mocavage
 	$qry = "SELECT pass FROM `users` WHERE username = '$user' ";
 	$result_hash = mysqli_query($conn, $qry) or die (mysqli_error($conn));
-	if(password_verify($password, $result_hash)){
-		$psvfy = 1;
-	}else{
-		$psvfy = 0;
-		echo "Invalid Password";
-	}
-	
-	if(!$query){
-		die("SQL Query failed: " . mysqli_error($conn));
-	}
-	if ($username != "" && $count == 1 && $psvfy == 1){
-		//Set TimeStamp for Session after succesfull login attempt.
-		setTimeStamp();
+	try{
+		if(password_verify($password, $result_hash)){
+			$psvfy = 1;
+		}else{
+			$psvfy = 0;
+			echo "Invalid Password";
+		}
 		
-		$_SESSION['login_user'] = $user;
-		//$_SESSION['login_pass'] = $pass;
+		if(!$query){
+			die("SQL Query failed: " . mysqli_error($conn));
+			throw new Exception("SQL Query Failed: " . mysqli_error($conn), 302);
+		}
+		if ($username != "" && $count == 1 && $psvfy == 1){
+			//Set TimeStamp for Session after succesfull login attempt.
+			setTimeStamp();
+			
+			$_SESSION['login_user'] = $user;
+			//$_SESSION['login_pass'] = $pass;
+			
+			$valid = 1;
+		}else{
+			$valid = 0;	
+			throw new Exception("User not validated attempt: " . mysqli_error($conn), 252);
+		}
+		$_SESSION['valid'] = $valid;
+			return $valid;
+	}catch (Exception $e){
+		$datetime = new DateTime();
+		$datetime->setTimezone(new DateTimeZone('UTC'));
+		$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
 		
-		$valid = 1;
-	}else{
-		$valid = 0;	
+		//log to default error_log destination
+		error_log($logentry);
 	}
-	$_SESSION['valid'] = $valid;
-		return $valid;
 }
 }
 
@@ -107,16 +118,36 @@ function isSessionStarted()
 if(!function_exists('isSessionStarted')){
 function getUsersByFirstName($search){
 	$conn = dbConnect(); 
-	if (mysqli_connect_errno()) {
-		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		exit();
+	try{
+		if (mysqli_connect_errno()) {
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			throw new Exception("SQL Query Failed: " . mysqli_error($conn), 302);
+			exit();
+		}
+	}catch (Exception $e){
+		$datetime = new DateTime();
+		$datetime->setTimezone(new DateTimeZone('UTC'));
+		$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+		
+		//log to default error_log destination
+		error_log($logentry);
 	}
-	$query = " SELECT * FROM users WHERE FIRST_NAME LIKE '%$search%'";
-	$result = mysqli_query($conn, $query);
-	if(!$result){
-		die("Could not retrieve data: " . mysqli_error($conn));
-		return null;
-	}
+	try{
+		$query = " SELECT * FROM users WHERE FIRST_NAME LIKE '%$search%'";
+		$result = mysqli_query($conn, $query);
+		if(!$result){
+			die("Could not retrieve data: " . mysqli_error($conn));
+			throw new Exception("SQL Query Failed - Could not retreieve data: " . mysqli_error($conn), 302);
+			return null;
+		}
+	}catch (Exception $e){
+		$datetime = new DateTime();
+		$datetime->setTimezone(new DateTimeZone('UTC'));
+		$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+		
+		//log to default error_log destination
+		error_log($logentry);
+	}	
 	$users = [];
 	$index = 0;
 	while($row = mysqli_fetch_assoc($result)){
@@ -133,15 +164,35 @@ function getUsersByFirstName($search){
 if(!function_exists('isSessionStarted')){
 function getUsersByLastName($search){
 	$conn = dbConnect(); 
-	if (mysqli_connect_errno()) {
-		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		exit();
+	try{
+		if (mysqli_connect_errno()) {
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			throw new Exception("SQL Query Failed - Could not connect to DB: " + mysqli_error($conn), 302);
+			exit();
+		}
+	}catch (Exception $e){
+		$datetime = new DateTime();
+		$datetime->setTimezone(new DateTimeZone('UTC'));
+		$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+		
+		//log to default error_log destination
+		error_log($logentry);
 	}
-	$query = " SELECT * FROM users WHERE LASTNAME LIKE '%$search%'";
-	$result = mysqli_query($conn, $query);
-	if(!$result){
-		die("Could not retrieve data: " . mysqli_error($conn));
-		return null;
+	try{
+		$query = " SELECT * FROM users WHERE LASTNAME LIKE '%$search%'";		
+		$result = mysqli_query($conn, $query);
+		if(!$result){
+			die("Could not retrieve data: " . mysqli_error($conn));
+			throw new Exception("SQL Query Failed - Could not retreieve data: " + mysqli_error($conn), 302);
+			return null;
+		}
+	}catch (Exception $e){
+		$datetime = new DateTime();
+		$datetime->setTimezone(new DateTimeZone('UTC'));
+		$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+		
+		//log to default error_log destination
+		error_log($logentry);
 	}
 	$users = [];
 	$index = 0;

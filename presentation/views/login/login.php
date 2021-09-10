@@ -32,12 +32,23 @@ include '../navigation.php';
 			$valid = checkUser();
 			
 			echo $_SESSION["valid"];
-			$_SESSION["valid"] = $valid;
-			if(session_id() !== NULL){
-				header("Location:../store.php");
-			}else{
-				header("Location:./loginFailed.php");
-			}
+			try{
+				$_SESSION["valid"] = $valid;
+				if(session_id() !== NULL){
+					header("Location:../store.php");
+					throw new Exception("User passed Login: ", 202);
+				}else{
+					header("Location:./loginFailed.php");
+					throw new Exception("User Failed Login: ", 202);
+				}
+			}catch (Exception $e){
+			$datetime = new DateTime();
+			$datetime->setTimezone(new DateTimeZone('UTC'));
+			$logentry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+		
+			//log to default error_log destination
+			error_log($logentry);
+			}	
 			//$row = $result-fetch_assoc();
 		}	
 ?>
