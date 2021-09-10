@@ -46,7 +46,7 @@ include('../../autoloader.php');
                             <td><?php echo $results->data[$i]['Price']; ?></td>
                             <td><?php echo $results->data[$i]['Image']; ?></td>
                     		</tr>
-            				//<?php endfor; ?>
+            				<!<?php //endfor; ?>!>
                         </tbody>
                 </table>
         </div>

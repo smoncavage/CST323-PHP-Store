@@ -21,4 +21,4 @@ Some portions based on code found on: https://codeofaninja.com/2015/08/simple-ph
 </head>
 
 <body class = "body">
-<?php include './navigation.php'; ?>
+<?php include 'navigation.php'; ?>
