@@ -9,10 +9,10 @@ Milestone 1
 //include auth_session.php file on all user panel pages
 include("auth_session.php");
 include '../views/layout_head.php';
-sessCheck();
+/* sessCheck();
 if($_SESSION["valid"] != 1){
 	header("Location: ./login.php");
-}
+} */
 ?>
 <?php include('../../../autoloader.php');; ?>
 <body class = "body">
