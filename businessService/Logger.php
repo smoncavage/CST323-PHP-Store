@@ -33,7 +33,8 @@ class MyLogger implements ILogger{
 		if(self::$logger == null){
 			//Log to Standard 
 			self::$logger = new Logger('phpLog');
-			self::$logger->pushHandler(new StreamHandler('php://stdout', Logger::DEBUG));
+			self::$logger->pushHandler(new LogglyHandler('e835e345-6359-461c-ae27-66eb600b922e/tag/monolog', Logger::DEBUG));
+			self::$logger->addWarning('test logs to loggly');
 		}
 		return self::$logger;
 	}
